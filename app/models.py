@@ -19,7 +19,7 @@ class User(Base):
 class TaxDue(Base):
     __tablename__ = "taxdue" 
     id = Column(Integer, primary_key=True,nullable=False) 
-    user_id = Column(Integer,ForeignKey("users.user_id",ondelete="CASCADE"),primary_key=True,nullable=False)
+    user_id = Column(Integer,ForeignKey("users.user_id",ondelete="CASCADE"),nullable=False)
     pan_card = Column(String,nullable=False)
     income_salary = Column(Integer, nullable=False)
     income_stock = Column(Integer, nullable=False) 
