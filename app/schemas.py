@@ -1,5 +1,6 @@
 from pydantic import BaseModel
 from datetime import datetime
+from typing import Optional
 
 class UserCreate(BaseModel):
     username : str
@@ -37,7 +38,17 @@ class TaxDue(BaseModel):
     class Config:
         orm_mode = True
 
+class Login(BaseModel):
+    username : str
+    password : str
 
+class Token(BaseModel):
+    access_token : str
+    token_type : str
+
+class TokenData(BaseModel):
+    user_id : Optional[str] = None
+    role : Optional[str] = None
     
 
 

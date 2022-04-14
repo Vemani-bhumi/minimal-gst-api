@@ -1,5 +1,5 @@
 from fastapi import APIRouter,Depends,HTTPException,status
-from .. import schemas,models
+from .. import schemas,models,oauth2
 from sqlalchemy.orm import Session
 from ..database import get_db
 
@@ -32,7 +32,7 @@ def create_tax_due(tax_due : schemas.TaxDueCreate, db : Session = Depends(get_db
     
 
 @router.patch("/{id}",response_model=schemas.TaxDue)
-def update_tax_due_status(id:int, updated_tax_due : schemas.TaxDue,db : Session = Depends(get_db)):
+def update_tax_due_status(id:int, updated_tax_due : schemas.TaxDueCreate,db : Session = Depends(get_db), current_user : int = Depends(oauth2.get_current_user)):
     tax_due_query = db.query(models.TaxDue).filter(models.TaxDue.user_id == id)
     tax_due = tax_due_query.first()
 

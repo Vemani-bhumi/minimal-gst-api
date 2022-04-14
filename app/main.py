@@ -3,7 +3,7 @@ import psycopg2
 import time
 from psycopg2.extras import RealDictCursor
 from . import models
-from .routers import users,taxdue
+from .routers import users,taxdue,auth
 from .database import engine
 
 models.Base.metadata.create_all(bind=engine)
@@ -22,6 +22,7 @@ while True:
 
 app.include_router(users.router)
 app.include_router(taxdue.router)
+app.include_router(auth.router)
  
 
 @app.get("/")
